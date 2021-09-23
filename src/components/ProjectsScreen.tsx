@@ -15,7 +15,7 @@ import {
     Spinner
 } from "./styles/Card";
 
-const ProjectsScreen = () => {
+const ProjectsScreen = ({ history }: any) => {
     const dispatch = useDispatch();
 
     const getProjects = useSelector((state: any) => state.getProjects);
@@ -50,14 +50,14 @@ const ProjectsScreen = () => {
 
                                 <CardParagraph>{pro.description}</CardParagraph>
 
-                                <CardButton type="button">View</CardButton>
+                                <CardButton onClick={() => history.push(`/projects/${pro.id}`)} type="button">
+                                    View
+                                </CardButton>
                             </CardBody>
                         </CardWrapper>
                     ))}
                 </>
             )}
-
-            {/* <ProjectScreenById id={data?.id} /> */}
         </div>
     );
 };

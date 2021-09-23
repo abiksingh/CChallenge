@@ -35,7 +35,7 @@ export const getAllProjectById = (id: string) => async (dispatch: Dispatch) => {
             type: GET_PROJECTS_ID_REQUEST
         });
 
-        const { data } = await axios.get(`/projects?pageNumber=1&limit=10/${id}`);
+        const { data } = await axios.get(`/projects/${id}`);
 
         dispatch({
             type: GET_PROJECTS_ID_SUCCESS,

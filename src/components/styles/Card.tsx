@@ -69,13 +69,20 @@ export const CardButton = styled.button`
 `;
 
 export const CardParagraph = styled.p`
-    display: relative;
-    font-size: 12px;
+    position: relative;
+    font-size: 0.8rem;
     text-decoration: none;
     text-align: center;
     color: #aaa;
     cursor: pointer;
     transition: color 0.25s ease-in;
+    display: -webkit-box;
+    height: 6rem;
+    line-height: 0.9rem;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
 
     &:hover {
         color: #777;
