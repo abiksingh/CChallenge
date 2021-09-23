@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProjects } from "../redux/actions/projectsActions";
 import ProjectScreenById from "./ProjectScreenById";
+import moment from "moment";
 import {
     CardWrapper,
     CardHeader,
@@ -10,14 +11,17 @@ import {
     CardStatus,
     CardButton,
     CardParagraph,
-    CardDate
+    CardDate,
+    Spinner
 } from "./styles/Card";
 
 const ProjectsScreen = () => {
     const dispatch = useDispatch();
 
     const getProjects = useSelector((state: any) => state.getProjects);
-    const { data } = getProjects;
+    const { data, loading } = getProjects;
+
+    console.log(moment.utc(data?.duration?.start).local().format("DD/MM/YYYY"));
 
     console.log(data);
 
@@ -27,24 +31,31 @@ const ProjectsScreen = () => {
 
     return (
         <div>
-            <CardWrapper>
-                <CardBody>
-                    <CardHeader>
-                        <CardHeading>Project 1</CardHeading>
-                    </CardHeader>
-                    <CardStatus>running</CardStatus>
+            {loading ? (
+                <Spinner />
+            ) : (
+                <>
+                    {data?.map((pro: any) => (
+                        <CardWrapper key={pro.id}>
+                            <CardBody>
+                                <CardHeader>
+                                    <CardHeading>{pro.name}</CardHeading>
+                                </CardHeader>
+                                <CardStatus>{pro.status}</CardStatus>
 
-                    <CardDate>01.01.21 to 31.12.21</CardDate>
+                                <CardDate>
+                                    {moment.utc(pro?.duration?.start).local().format("DD/MM/YYYY")} to{" "}
+                                    {moment.utc(pro?.duration?.end).local().format("DD/MM/YYYY")}{" "}
+                                </CardDate>
 
-                    <CardParagraph>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis, odio ratione rem ab atque
-                        accusamus placeat? Sit ea amet doloribus ratione a eaque laudantium eveniet, animi magni facere
-                        ad vel!
-                    </CardParagraph>
+                                <CardParagraph>{pro.description}</CardParagraph>
 
-                    <CardButton type="button">View</CardButton>
-                </CardBody>
-            </CardWrapper>
+                                <CardButton type="button">View</CardButton>
+                            </CardBody>
+                        </CardWrapper>
+                    ))}
+                </>
+            )}
 
             {/* <ProjectScreenById id={data?.id} /> */}
         </div>
