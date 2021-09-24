@@ -5,17 +5,31 @@ import { CardWrapper, CardHeader, CardHeading, CardBody, CardStatus, CardParagra
 import moment from "moment";
 import Spinner from "./Spinner";
 
-const ProjectScreenById = ({ match }: any) => {
+const ProjectScreenById = ({ id }: any) => {
     const dispatch = useDispatch();
 
-    const getProjectById = useSelector((state: any) => state.getProjectById);
+    type RootState = {
+        getProjectById: {
+            loading: boolean;
+            project: any;
+        };
+    };
+
+    const getProjectById = useSelector((state: RootState) => state.getProjectById);
     const { loading, project } = getProjectById;
 
     console.log(project);
 
     useEffect(() => {
-        dispatch(getAllProjectById(match.params.id));
-    }, [dispatch]);
+        dispatch(getAllProjectById(id));
+    }, [dispatch, id]);
+
+    type Consultant = {
+        id: string;
+        avatar: string;
+        firstName: string;
+        lastName: number;
+    };
 
     return (
         <div>
@@ -27,18 +41,18 @@ const ProjectScreenById = ({ match }: any) => {
                         <CardHeader>
                             <CardHeading>{project?.name}</CardHeading>
                         </CardHeader>
-                        <CardStatus>{project?.status}</CardStatus>
+                        <CardStatus status={project?.status}>{project?.status}</CardStatus>
 
                         <CardDate>
                             {moment.utc(project?.duration?.start).local().format("DD/MM/YYYY")} to{" "}
-                            {moment.utc(project?.duration?.end).local().format("DD/MM/YYYY")}{" "}
+                            <strong> {moment.utc(project?.duration?.end).local().format("DD/MM/YYYY")} </strong>
                         </CardDate>
 
                         <CardParagraph>{project?.description}</CardParagraph>
 
-                        {project?.consultants.map((consultant: any) => (
+                        {project?.consultants.map((consultant: Consultant) => (
                             <ul key={consultant.id}>
-                                <img src={consultant.avatar} />
+                                <img src={consultant.avatar} alt="avatar" />
                                 <li>
                                     {consultant.firstName} {consultant.lastName}
                                 </li>

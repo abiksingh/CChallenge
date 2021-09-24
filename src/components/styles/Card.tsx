@@ -9,10 +9,6 @@ export const CardWrapper = styled.div`
     width: 300px;
     font-family: Quicksand, arial, sans-serif;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.05), 0 0px 40px rgba(0, 0, 0, 0.08);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     border-radius: 2rem;
 `;
 
@@ -31,12 +27,13 @@ export const CardBody = styled.div`
     padding-left: 32px;
 `;
 
-export const CardStatus = styled.h4`
+export const CardStatus = styled.h4<{ status: any }>`
     position: relative;
     display: block;
     width: 100%;
     font-size: 12px;
     text-align: center;
+    color: ${(props) => (props.status === "done" ? "green" : props.status === "request" ? "blue" : "purple")};
 `;
 
 export const CardDate = styled.h4`
@@ -44,6 +41,7 @@ export const CardDate = styled.h4`
     display: block;
     width: 100%;
     font-size: 12px;
+    font-weight: 100;
     text-align: center;
 `;
 
@@ -55,7 +53,7 @@ export const CardButton = styled.button`
     font-size: 14px;
     font-weight: 700;
     color: #fff;
-    background-color: #e5195f;
+    background-color: #1f6c86;
     border: 0;
     border-radius: 35px;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.08);

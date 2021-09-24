@@ -1,11 +1,16 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { getProjectsReducer, getProjectByIdReducer } from "./redux/reducers/projectsReducers";
+import {
+    getProjectsReducer,
+    getProjectByIdReducer,
+    filterProjectsByIdReducer
+} from "./redux/reducers/projectsReducers";
 
 const reducer = combineReducers({
     getProjects: getProjectsReducer,
-    getProjectById: getProjectByIdReducer
+    getProjectById: getProjectByIdReducer,
+    filterProjectsById: filterProjectsByIdReducer
 });
 
 const middleware = [thunk];
