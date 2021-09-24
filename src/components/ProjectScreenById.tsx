@@ -1,17 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProjectById } from "../redux/actions/projectsActions";
-import {
-    CardWrapper,
-    CardHeader,
-    CardHeading,
-    CardBody,
-    CardStatus,
-    CardParagraph,
-    CardDate,
-    Spinner
-} from "./styles/Card";
+import { CardWrapper, CardHeader, CardHeading, CardBody, CardStatus, CardParagraph, CardDate } from "./styles/Card";
 import moment from "moment";
+import Spinner from "./Spinner";
 
 const ProjectScreenById = ({ match }: any) => {
     const dispatch = useDispatch();
@@ -43,6 +35,15 @@ const ProjectScreenById = ({ match }: any) => {
                         </CardDate>
 
                         <CardParagraph>{project?.description}</CardParagraph>
+
+                        {project?.consultants.map((consultant: any) => (
+                            <ul key={consultant.id}>
+                                <img src={consultant.avatar} />
+                                <li>
+                                    {consultant.firstName} {consultant.lastName}
+                                </li>
+                            </ul>
+                        ))}
                     </CardBody>
                 </CardWrapper>
             )}

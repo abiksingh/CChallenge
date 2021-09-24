@@ -11,9 +11,9 @@ import {
     CardStatus,
     CardButton,
     CardParagraph,
-    CardDate,
-    Spinner
+    CardDate
 } from "./styles/Card";
+import Spinner from "./Spinner";
 
 const ProjectsScreen = ({ history }: any) => {
     const dispatch = useDispatch();
