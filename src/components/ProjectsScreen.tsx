@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { RouteComponentProps } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProjects, filterProjectById } from "../redux/actions/projectsActions";
-import ProjectScreenById from "./ProjectScreenById";
+import { getAllProjects } from "../redux/actions/projectsActions";
 import moment from "moment";
 import {
     CardWrapper,
@@ -11,13 +11,13 @@ import {
     CardStatus,
     CardButton,
     CardParagraph,
-    CardDate
-} from "./styles/Card";
+    CardDate,
+    Grid
+} from "./UI Helpers/Styles";
 import Spinner from "./Spinner";
-import Drawer from "./Drawer";
 import Navbar from "./Navbar";
 
-const ProjectsScreen = () => {
+const ProjectsScreen = ({ history }: RouteComponentProps) => {
     const dispatch = useDispatch();
 
     type RootState = {
@@ -30,18 +30,9 @@ const ProjectsScreen = () => {
     const getProjects = useSelector((state: RootState) => state.getProjects);
     const { data, loading } = getProjects;
 
-    console.log(data);
-
     useEffect(() => {
         dispatch(getAllProjects());
     }, [dispatch]);
-
-    const [toggle, setToggle] = useState(false);
-
-    const onClickHandler = (id: any) => {
-        setToggle(true);
-        // dispatch(filterProjectById(id));
-    };
 
     type Project = {
         description: string;
@@ -61,8 +52,8 @@ const ProjectsScreen = () => {
             ) : (
                 <>
                     <Navbar />
-                    {data?.map((pro: Project) => (
-                        <>
+                    <Grid>
+                        {data?.map((pro: Project) => (
                             <CardWrapper key={pro.id}>
                                 <CardBody>
                                     <CardHeader>
@@ -77,19 +68,13 @@ const ProjectsScreen = () => {
 
                                     <CardParagraph>{pro.description}</CardParagraph>
 
-                                    {/* <CardButton onClick={() => history.push(`/projects/${pro.id}`)} type="button">
-                                        View
-                                    </CardButton> */}
-
-                                    <CardButton onClick={() => onClickHandler(pro.id)} type="button">
+                                    <CardButton onClick={() => history.push(`/projects/${pro.id}`)} type="button">
                                         View
                                     </CardButton>
                                 </CardBody>
                             </CardWrapper>
-
-                            {toggle && <Drawer toggle={toggle} setToggle={setToggle} id={pro.id} />}
-                        </>
-                    ))}
+                        ))}
+                    </Grid>
                 </>
             )}
         </div>

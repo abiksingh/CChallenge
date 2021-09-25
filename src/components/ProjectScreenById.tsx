@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import * as H from "history";
 import { getAllProjectById } from "../redux/actions/projectsActions";
 import {
     DrawerHeading,
     DrawerStatus,
     DrawerWrapper,
     ConsultantWrapper,
+    ConsultantUlWrapper,
     ConsultantImage,
     ConsultantList,
     DrawerButton,
@@ -14,11 +16,20 @@ import {
     DurationHeader,
     DescriptionHeader,
     ConsultantHeader
-} from "./styles/Card";
+} from "./UI Helpers/Styles";
 import moment from "moment";
 import Spinner from "./Spinner";
 
-const ProjectScreenById = ({ id, setToggle }: any) => {
+interface RouteProps<P> {
+    match: match<P>;
+    history: H.History;
+}
+
+export interface match<P> {
+    params: P;
+}
+
+const ProjectScreenById = (props: RouteProps<any>) => {
     const dispatch = useDispatch();
 
     type RootState = {
@@ -31,11 +42,9 @@ const ProjectScreenById = ({ id, setToggle }: any) => {
     const getProjectById = useSelector((state: RootState) => state.getProjectById);
     const { loading, project } = getProjectById;
 
-    console.log(project);
-
     useEffect(() => {
-        dispatch(getAllProjectById(id));
-    }, [dispatch, id]);
+        dispatch(getAllProjectById(props.match.params.id));
+    }, [dispatch, props.match.params.id]);
 
     type Consultant = {
         id: string;
@@ -51,7 +60,7 @@ const ProjectScreenById = ({ id, setToggle }: any) => {
             ) : (
                 <>
                     <DrawerWrapper>
-                        <DrawerButton onClick={() => setToggle(false)}>Back</DrawerButton>
+                        <DrawerButton onClick={() => props.history.push(`/`)}>Back</DrawerButton>
                         <DrawerStatus status={project?.status}>{project?.status}</DrawerStatus>
                         <DrawerHeading>{project?.name}</DrawerHeading>
                         <DurationHeader>Duration</DurationHeader>
@@ -62,12 +71,15 @@ const ProjectScreenById = ({ id, setToggle }: any) => {
                         <DescriptionHeader>Description</DescriptionHeader>
                         <DrawerParagraph>{project?.description}</DrawerParagraph>
                         <ConsultantHeader>Consultants</ConsultantHeader>
+
                         {project?.consultants.map((consultant: Consultant) => (
                             <ConsultantWrapper key={consultant.id}>
                                 <ConsultantImage src={consultant.avatar} alt="avatar" />
-                                <ConsultantList>
-                                    {consultant.firstName} {consultant.lastName}
-                                </ConsultantList>
+                                <ConsultantUlWrapper>
+                                    <ConsultantList>
+                                        {consultant.firstName} {consultant.lastName}
+                                    </ConsultantList>
+                                </ConsultantUlWrapper>
                             </ConsultantWrapper>
                         ))}
                     </DrawerWrapper>

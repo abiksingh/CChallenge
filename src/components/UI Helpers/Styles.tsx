@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { device } from "./MediaQuery";
 
 export const CardWrapper = styled.div`
     position: relative;
@@ -10,6 +11,22 @@ export const CardWrapper = styled.div`
     font-family: Quicksand, arial, sans-serif;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.05), 0 0px 40px rgba(0, 0, 0, 0.08);
     border-radius: 2rem;
+`;
+
+export const Grid = styled.div`
+    display: grid;
+
+    @media ${device.mobileS} {
+        grid-template-columns: 1fr;
+    }
+
+    @media ${device.desktopL} {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    @media ${device.tablet} {
+        grid-template-columns: 1fr 1fr;
+    }
 `;
 
 export const CardHeader = styled.header`
@@ -76,7 +93,7 @@ export const CardParagraph = styled.p`
     transition: color 0.25s ease-in;
     display: -webkit-box;
     height: 6rem;
-    line-height: 0.9rem;
+
     overflow: hidden;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -93,19 +110,24 @@ export const DrawerWrapper = styled.div`
     margin: 1rem 1.5rem;
 `;
 
-export const ConsultantWrapper = styled.ul`
+export const ConsultantUlWrapper = styled.ul`
+    position: relative;
+`;
+
+export const ConsultantWrapper = styled.div`
     position: relative;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    top: 8rem;
+    flex-direction: row;
     left: 0;
-    margin-top: 2rem;
+    margin-top: 10rem;
+    align-items: center;
 `;
 
 export const ConsultantImage = styled.img`
     position: relative;
     border-radius: 100%;
+    width: 5rem;
+    height: 5rem;
 `;
 
 export const ConsultantList = styled.li`
@@ -115,7 +137,7 @@ export const ConsultantList = styled.li`
 
 export const DrawerButton = styled.button`
     display: block;
-    width: 30%;
+    width: 10%;
     padding: 12px 0;
     font-family: inherit;
     font-size: 14px;
@@ -137,32 +159,31 @@ export const DrawerDate = styled.h4`
     display: block;
     width: 100%;
     text-align: left;
-    font-size: 0.7rem;
+    font-size: 1.5rem;
     font-weight: 100;
 `;
 
 export const DrawerParagraph = styled.p`
     position: relative;
     display: block;
-    font-size: 1rem;
+    font-size: 1.5rem;
     text-decoration: none;
     text-align: start;
     color: #131212;
     height: 6rem;
-    line-height: 0.9rem;
 `;
 
 export const DrawerStatus = styled.h4<{ status: any }>`
     position: relative;
     display: block;
     width: 100%;
-    font-size: 12px;
+    font-size: 2rem;
     text-align: left;
     color: ${(props) => (props.status === "done" ? "green" : props.status === "request" ? "blue" : "purple")};
 `;
 
 export const DrawerHeading = styled.h1`
-    font-size: 24px;
+    font-size: 3rem;
     font-weight: bold;
     text-align: left;
 `;
@@ -171,7 +192,7 @@ export const DurationHeader = styled.h4`
     position: relative;
     display: block;
     width: 100%;
-    font-size: 12px;
+    font-size: 1rem;
     font-weight: 500;
     text-align: left;
     color: #9e9b9b;
@@ -181,7 +202,7 @@ export const DescriptionHeader = styled.h4`
     position: relative;
     display: block;
     width: 100%;
-    font-size: 12px;
+    font-size: 1rem;
     font-weight: 500;
     text-align: left;
     color: #9e9b9b;
@@ -192,7 +213,7 @@ export const ConsultantHeader = styled.h4`
     display: block;
     width: 100%;
     top: 8rem;
-    font-size: 12px;
+    font-size: 1rem;
     font-weight: 500;
     text-align: left;
     color: #9e9b9b;

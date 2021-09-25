@@ -6,8 +6,7 @@ import {
     GET_PROJECTS_FAIL,
     GET_PROJECTS_ID_REQUEST,
     GET_PROJECTS_ID_SUCCESS,
-    GET_PROJECTS_ID_FAIL,
-    FILTER_PROJECTS
+    GET_PROJECTS_ID_FAIL
 } from "../constants/projectsConstants";
 
 export const getAllProjects = () => async (dispatch: Dispatch) => {
@@ -16,7 +15,7 @@ export const getAllProjects = () => async (dispatch: Dispatch) => {
             type: GET_PROJECTS_REQUEST
         });
 
-        const { data } = await axios.get(`/projects?pageNumber=1&limit=10`);
+        const { data } = await axios.get(`/projects?pageNumber=1&limit=12`);
 
         dispatch({
             type: GET_PROJECTS_SUCCESS,
@@ -48,11 +47,4 @@ export const getAllProjectById = (id: string) => async (dispatch: Dispatch) => {
             payload: error.response && error.response.data.message ? error.response.data.message : error.message
         });
     }
-};
-
-export const filterProjectById = (id: string) => async (dispatch: Dispatch) => {
-    dispatch({
-        type: FILTER_PROJECTS,
-        payload: id
-    });
 };
