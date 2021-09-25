@@ -30,8 +30,6 @@ const ProjectsScreen = () => {
     const getProjects = useSelector((state: RootState) => state.getProjects);
     const { data, loading } = getProjects;
 
-    console.log(moment.utc(data?.duration?.start).local().format("DD/MM/YYYY"));
-
     console.log(data);
 
     useEffect(() => {
@@ -42,7 +40,7 @@ const ProjectsScreen = () => {
 
     const onClickHandler = (id: any) => {
         setToggle(true);
-        dispatch(filterProjectById(id));
+        // dispatch(filterProjectById(id));
     };
 
     type Project = {
@@ -89,7 +87,7 @@ const ProjectsScreen = () => {
                                 </CardBody>
                             </CardWrapper>
 
-                            {toggle && <Drawer id={pro.id} />}
+                            {toggle && <Drawer toggle={toggle} setToggle={setToggle} id={pro.id} />}
                         </>
                     ))}
                 </>
