@@ -6,7 +6,8 @@ import {
     GET_PROJECTS_FAIL,
     GET_PROJECTS_ID_REQUEST,
     GET_PROJECTS_ID_SUCCESS,
-    GET_PROJECTS_ID_FAIL
+    GET_PROJECTS_ID_FAIL,
+    GET_PROJECT_FOR_DRAWER
 } from "../constants/projectsConstants";
 
 export const getAllProjects = () => async (dispatch: Dispatch) => {
@@ -47,4 +48,11 @@ export const getAllProjectById = (id: string) => async (dispatch: Dispatch) => {
             payload: error.response && error.response.data.message ? error.response.data.message : error.message
         });
     }
+};
+
+export const getProjectForDrawer = (id: any) => (dispatch: Dispatch) => {
+    dispatch({
+        type: GET_PROJECT_FOR_DRAWER,
+        payload: id
+    });
 };

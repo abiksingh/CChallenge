@@ -7,7 +7,7 @@ function App() {
     return (
         <Router>
             <Route path="/" component={ProjectsScreen} exact />
-            <Route path="/projects/:id" component={ProjectScreenById} exact />
+            {/* <Route path="/projects/:id" component={ProjectScreenById} exact /> */}
         </Router>
     );
 }

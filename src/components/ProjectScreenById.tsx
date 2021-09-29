@@ -30,7 +30,7 @@ export interface match<P> {
     params: P;
 }
 
-const ProjectScreenById = (props: RouteProps<any>) => {
+const ProjectScreenById = ({ id, setToggle }: any) => {
     const dispatch = useDispatch();
 
     type RootState = {
@@ -44,8 +44,8 @@ const ProjectScreenById = (props: RouteProps<any>) => {
     const { loading, project } = getProjectById;
 
     useEffect(() => {
-        dispatch(getAllProjectById(props.match.params.id));
-    }, [dispatch, props.match.params.id]);
+        dispatch(getAllProjectById(id));
+    }, [dispatch, id]);
 
     type Consultant = {
         id: string;
@@ -61,7 +61,7 @@ const ProjectScreenById = (props: RouteProps<any>) => {
             ) : (
                 <>
                     <DrawerWrapper>
-                        <DrawerButton onClick={() => props.history.push(`/`)}>Back</DrawerButton>
+                        <DrawerButton onClick={() => setToggle(false)}>Back</DrawerButton>
                         <DrawerStatus status={project?.status}>{project?.status}</DrawerStatus>
                         <DrawerHeading>{project?.name}</DrawerHeading>
                         <DurationHeader>Duration</DurationHeader>
