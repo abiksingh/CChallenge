@@ -15,7 +15,8 @@ import {
     DrawerParagraph,
     DurationHeader,
     DescriptionHeader,
-    ConsultantHeader
+    ConsultantHeader,
+    Wrapper
 } from "./UI Helpers/Styles";
 import moment from "moment";
 import Spinner from "./Spinner";
@@ -70,18 +71,20 @@ const ProjectScreenById = (props: RouteProps<any>) => {
                         </DrawerDate>
                         <DescriptionHeader>Description</DescriptionHeader>
                         <DrawerParagraph>{project?.description}</DrawerParagraph>
-                        <ConsultantHeader>Consultants</ConsultantHeader>
+                        <ConsultantWrapper>
+                            <ConsultantHeader>Consultants</ConsultantHeader>
 
-                        {project?.consultants.map((consultant: Consultant) => (
-                            <ConsultantWrapper key={consultant.id}>
-                                <ConsultantImage src={consultant.avatar} alt="avatar" />
-                                <ConsultantUlWrapper>
-                                    <ConsultantList>
-                                        {consultant.firstName} {consultant.lastName}
-                                    </ConsultantList>
-                                </ConsultantUlWrapper>
-                            </ConsultantWrapper>
-                        ))}
+                            {project?.consultants.map((consultant: Consultant) => (
+                                <Wrapper key={consultant.id}>
+                                    <ConsultantImage src={consultant.avatar} alt="avatar" />
+                                    <ConsultantUlWrapper>
+                                        <ConsultantList>
+                                            {consultant.firstName} {consultant.lastName}
+                                        </ConsultantList>
+                                    </ConsultantUlWrapper>
+                                </Wrapper>
+                            ))}
+                        </ConsultantWrapper>
                     </DrawerWrapper>
                 </>
             )}

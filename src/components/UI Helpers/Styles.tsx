@@ -16,16 +16,16 @@ export const CardWrapper = styled.div`
 export const Grid = styled.div`
     display: grid;
 
-    @media ${device.mobileS} {
+    @media ${device.xs} {
         grid-template-columns: 1fr;
     }
 
-    @media ${device.desktopL} {
-        grid-template-columns: 1fr 1fr 1fr;
+    @media ${device.sm} {
+        grid-template-columns: 1fr 1fr;
     }
 
-    @media ${device.tablet} {
-        grid-template-columns: 1fr 1fr;
+    @media ${device.lg} {
+        grid-template-columns: 1fr 1fr 1fr;
     }
 `;
 
@@ -108,6 +108,20 @@ export const DrawerWrapper = styled.div`
     position: relative;
     top: 1rem;
     margin: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+`;
+
+export const ConsultantHeader = styled.h4`
+    position: relative;
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: left;
+    color: #9e9b9b;
+    margin-top: 5rem;
 `;
 
 export const ConsultantUlWrapper = styled.ul`
@@ -115,11 +129,26 @@ export const ConsultantUlWrapper = styled.ul`
 `;
 
 export const ConsultantWrapper = styled.div`
-    position: relative;
     display: flex;
-    flex-direction: row;
-    left: 0;
-    margin-top: 10rem;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    @media ${device.xs} {
+        margin-top: 30rem;
+    }
+
+    @media ${device.sm} {
+        margin-top: 6rem;
+    }
+
+    @media ${device.lg} {
+        margin-top: 0rem;
+    }
+`;
+
+export const Wrapper = styled.div`
+    display: flex;
     align-items: center;
 `;
 
@@ -128,6 +157,7 @@ export const ConsultantImage = styled.img`
     border-radius: 100%;
     width: 5rem;
     height: 5rem;
+    margin-top: 2rem;
 `;
 
 export const ConsultantList = styled.li`
@@ -202,17 +232,6 @@ export const DescriptionHeader = styled.h4`
     position: relative;
     display: block;
     width: 100%;
-    font-size: 1rem;
-    font-weight: 500;
-    text-align: left;
-    color: #9e9b9b;
-`;
-
-export const ConsultantHeader = styled.h4`
-    position: relative;
-    display: block;
-    width: 100%;
-    top: 8rem;
     font-size: 1rem;
     font-weight: 500;
     text-align: left;
