@@ -135,11 +135,11 @@ export const ConsultantWrapper = styled.div`
     justify-content: space-between;
 
     @media ${device.xs} {
-        margin-top: 30rem;
+        margin-top: 32rem;
     }
 
     @media ${device.sm} {
-        margin-top: 6rem;
+        margin-top: 8rem;
     }
 
     @media ${device.lg} {
@@ -167,7 +167,7 @@ export const ConsultantList = styled.li`
 
 export const DrawerButton = styled.button`
     display: block;
-    width: 10%;
+    width: 5rem;
     padding: 12px 0;
     font-family: inherit;
     font-size: 14px;
